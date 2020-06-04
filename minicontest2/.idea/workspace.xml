@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2e2375a4-2080-43bc-8361-9cf487aa3ac7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/minicontest2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/minicontest2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myTeam.py" beforeDir="false" afterPath="$PROJECT_DIR$/myTeam.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/score" beforeDir="false" afterPath="$PROJECT_DIR$/score" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1byDqAsmBL4wZflNK7nzlcAXVtk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2e2375a4-2080-43bc-8361-9cf487aa3ac7" name="Default Changelist" comment="" />
+      <created>1589595627151</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589595627151</updated>
+      <workItem from="1589595628378" duration="2355000" />
+      <workItem from="1590100890742" duration="8891000" />
+      <workItem from="1590707398502" duration="1301000" />
+      <workItem from="1590708805017" duration="2206000" />
+      <workItem from="1591300947656" duration="2032000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="398" y="146" width="672" height="678" key="search.everywhere.popup" timestamp="1589597982956">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="398" y="146" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1589597982956" />
+  </component>
+</project>
