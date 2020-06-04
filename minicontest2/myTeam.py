@@ -16,6 +16,7 @@ from captureAgents import CaptureAgent
 import random, time, util
 from game import Directions
 import game
+from util import nearestPoint
 
 
 #################
@@ -23,13 +24,8 @@ import game
 #################
 
 def createTeam(firstIndex, secondIndex, isRed,
-<<<<<<< Updated upstream
-               first = 'DummyAgent', second = 'DummyAgent'):
-  """
-=======
                first='OffensiveReflexAgent', second='DefensiveReflexAgent'):
     """
->>>>>>> Stashed changes
   This function should return a list of two agents that will form the
   team, initialized using firstIndex and secondIndex as their agent
   index numbers.  isRed is True if the red team is being created, and
@@ -43,69 +39,18 @@ def createTeam(firstIndex, secondIndex, isRed,
   any extra arguments, so you should make sure that the default
   behavior is what you want for the nightly contest.
   """
-<<<<<<< Updated upstream
 
-  # The following line is an example only; feel free to change it.
-  return [eval(first)(firstIndex), eval(second)(secondIndex)]
-=======
     return [eval(first)(firstIndex), eval(second)(secondIndex)]
 
->>>>>>> Stashed changes
 
 ##########
 # Agents #
 ##########
 
-<<<<<<< Updated upstream
-class DummyAgent(CaptureAgent):
-  """
-  A Dummy agent to serve as an example of the necessary agent structure.
-  You should look at baselineTeam.py for more details about how to
-  create an agent as this is the bare minimum.
-  """
-
-  def registerInitialState(self, gameState):
-    """
-    This method handles the initial setup of the
-    agent to populate useful fields (such as what team
-    we're on).
-
-    A distanceCalculator instance caches the maze distances
-    between each pair of positions, so your agents can use:
-    self.distancer.getDistance(p1, p2)
-
-    IMPORTANT: This method may run for at most 15 seconds.
-    """
-
-    '''
-    Make sure you do not delete the following line. If you would like to
-    use Manhattan distances instead of maze distances in order to save
-    on initialization time, please take a look at
-    CaptureAgent.registerInitialState in captureAgents.py.
-    '''
-    CaptureAgent.registerInitialState(self, gameState)
-
-    '''
-    Your initialization code goes here, if you need any.
-    '''
-
-
-  def chooseAction(self, gameState):
-    """
-    Picks among actions randomly.
-    """
-    actions = gameState.getLegalActions(self.index)
-
-    '''
-    You should change this in your own agent.
-    '''
-
-    return random.choice(actions)
-=======
 class ReflexCaptureAgent(CaptureAgent):
     """
-  A base class for reflex agents that chooses score-maximizing actions
-  """
+A base class for reflex agents that chooses score-maximizing actions
+"""
 
     def registerInitialState(self, gameState):
         self.start = gameState.getAgentPosition(self.index)
@@ -113,8 +58,8 @@ class ReflexCaptureAgent(CaptureAgent):
 
     def chooseAction(self, gameState):
         """
-    Picks among the actions with the highest Q(s,a).
-    """
+Picks among the actions with the highest Q(s,a).
+"""
         actions = gameState.getLegalActions(self.index)
 
         # You can profile your evaluation time by uncommenting these lines
@@ -142,8 +87,8 @@ class ReflexCaptureAgent(CaptureAgent):
 
     def getSuccessor(self, gameState, action):
         """
-    Finds the next successor which is a grid position (location tuple).
-    """
+Finds the next successor which is a grid position (location tuple).
+"""
         successor = gameState.generateSuccessor(self.index, action)
         pos = successor.getAgentState(self.index).getPosition()
         if pos != nearestPoint(pos):
@@ -154,16 +99,16 @@ class ReflexCaptureAgent(CaptureAgent):
 
     def evaluate(self, gameState, action):
         """
-    Computes a linear combination of features and feature weights
-    """
+Computes a linear combination of features and feature weights
+"""
         features = self.getFeatures(gameState, action)
         weights = self.getWeights(gameState, action)
         return features * weights
 
     def getFeatures(self, gameState, action):
         """
-    Returns a counter of features for the state
-    """
+Returns a counter of features for the state
+"""
         features = util.Counter()
         successor = self.getSuccessor(gameState, action)
         features['successorScore'] = self.getScore(successor)
@@ -171,9 +116,9 @@ class ReflexCaptureAgent(CaptureAgent):
 
     def getWeights(self, gameState, action):
         """
-    Normally, weights do not depend on the gamestate.  They can be either
-    a counter or a dictionary.
-    """
+Normally, weights do not depend on the gamestate.  They can be either
+a counter or a dictionary.
+"""
         return {'successorScore': 1.0}
 
 
@@ -197,10 +142,16 @@ class OffensiveReflexAgent(ReflexCaptureAgent):
         else:
             goHome = 0
 
-        if (myState.numReturned >= 1):
-            onDefense = 1
+        if (self.red):
+            if (self.getScore(successor) > 0):
+                onDefense = 1
+            else:
+                onDefense = 0
         else:
-            onDefense = 0
+            if (self.getScore(successor) < 0):
+                onDefense = 1
+            else:
+                onDefense = 0
 
         if (onDefense):
             # Computes whether we're on defense (1) or offense (0)
@@ -213,6 +164,11 @@ class OffensiveReflexAgent(ReflexCaptureAgent):
             if len(invaders) > 0:
                 dists = [self.getMazeDistance(myPos, a.getPosition()) for a in invaders]
                 features['invaderDistance'] = min(dists)
+            # Computes distance to ghosts that are not invaders yet
+            inhiding = [a for a in enemies if not a.isPacman and a.getPosition() != None]
+            if len(inhiding) > 0:
+                dists = [self.getMazeDistance(myPos, a.getPosition()) for a in inhiding]
+                features['hidingDistance'] = min(dists)
         else:
             if (goHome):
                 team = self.getTeam(gameState)
@@ -232,7 +188,7 @@ class OffensiveReflexAgent(ReflexCaptureAgent):
         return features
 
     def getWeights(self, gameState, action):
-        return {'successorScore': 150, 'distanceToFood': -1,
+        return {'distanceToFood': -10,
                 'teamDistance': -1, 'stop': -100, 'reverse': -10,
                 'numInvaders': -1000, 'invaderDistance': -5, 'onDefense': 100}
 
@@ -275,7 +231,6 @@ class DefensiveReflexAgent(ReflexCaptureAgent):
         if action == rev: features['reverse'] = 1
 
         return features
->>>>>>> Stashed changes
 
     def getWeights(self, gameState, action):
         return {'numInvaders': -1000, 'onDefense': 100, 'invaderDistance': -5,
